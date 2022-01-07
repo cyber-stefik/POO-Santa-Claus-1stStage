@@ -70,8 +70,8 @@ public final class InputLoader {
 
 			if (jsonAnnualChanges != null) {
 				for (Object annualChange : jsonAnnualChanges) {
-					String newSantaBudget = String.valueOf(((JSONObject) annualChange)
-							.get(Constants.NEWSANTABUDGET));
+					String newSantaBudget = String.valueOf(((JSONObject)
+							annualChange).get(Constants.NEWSANTABUDGET));
 					JSONArray jsonNewGifts = ((JSONArray) ((JSONObject)
 							annualChange).get(Constants.NEWGIFTS));
 					JSONArray jsonNewChildren = ((JSONArray) ((JSONObject)
@@ -97,12 +97,13 @@ public final class InputLoader {
 						for (Object jsonChild : jsonChildrenUpdates) {
 							String id = String.valueOf(((JSONObject) jsonChild)
 										.get(Constants.ID));
-							String niceScore = String.valueOf(((JSONObject) jsonChild)
-									.get(Constants.NICESCORE));
+							String niceScore = String.valueOf(((JSONObject)
+									jsonChild).get(Constants.NICESCORE));
 							if (niceScore.equals("null")) {
 								niceScore = "-1";
 							}
-							childUpdates.add(new ChildUpdate(Integer.parseInt(id),
+							childUpdates.add(new ChildUpdate(
+										Integer.parseInt(id),
 										Double.valueOf(niceScore),
 										Utils.convertJSONArray((JSONArray)
 										((JSONObject) jsonChild).
@@ -112,8 +113,9 @@ public final class InputLoader {
 						System.out.println("Nu exista update-uri");
 					}
 
-					annualChanges.add(new AnnualChanges(Double.valueOf(newSantaBudget),
-										newGifts, newChildren, childUpdates));
+					annualChanges.add(new AnnualChanges(
+							Double.valueOf(newSantaBudget),
+							newGifts, newChildren, childUpdates));
 				}
 			}
 
@@ -161,7 +163,8 @@ public final class InputLoader {
 				Integer.parseInt(age),
 				city,
 				Double.valueOf(niceScore),
-				Utils.convertJSONArray((JSONArray) jsonChild.get(Constants.GIFTSPREFERENCES)
+				Utils.convertJSONArray((JSONArray)
+						jsonChild.get(Constants.GIFTSPREFERENCES)
 		)));
 	}
 }

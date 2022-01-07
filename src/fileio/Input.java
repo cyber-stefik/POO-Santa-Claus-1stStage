@@ -43,4 +43,12 @@ public final class Input {
 	public ArrayList<AnnualChanges> getAnnualChanges() {
 		return annualChanges;
 	}
+
+	public int getNumberOfYears() {
+		return numberOfYears;
+	}
+
+	public Double getSantaBudget() {
+		return santaBudget;
+	}
 }

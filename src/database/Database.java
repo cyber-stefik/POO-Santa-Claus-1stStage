@@ -9,6 +9,8 @@ import javax.xml.crypto.Data;
 import java.util.ArrayList;
 
 public final class Database {
+	private int numberOfYears;
+	private Double santaBudget;
 	private ArrayList<Child> children = new ArrayList<>();
 	private ArrayList<Present> presents = new ArrayList<>();
 	private ArrayList<AnnualChanges> annualChanges = new ArrayList<>();
@@ -28,9 +30,19 @@ public final class Database {
 	}
 
 	public void addData(Input input) {
+		this.numberOfYears = input.getNumberOfYears();
+		this.santaBudget = input.getSantaBudget();
 		this.children = input.getChildren();
 		this.presents = input.getPresents();
 		this.annualChanges = input.getAnnualChanges();
+	}
+
+	public static int getInstanceCount() {
+		return instanceCount;
+	}
+
+	public static void setInstanceCount(int instanceCount) {
+		Database.instanceCount = instanceCount;
 	}
 
 	public ArrayList<Child> getChildren() {
@@ -45,11 +57,42 @@ public final class Database {
 		return annualChanges;
 	}
 
-	public static int getInstanceCount() {
-		return instanceCount;
+	public int getNumberOfYears() {
+		return numberOfYears;
 	}
 
-	public static void setInstanceCount(int instanceCount) {
-		Database.instanceCount = instanceCount;
+	public void setNumberOfYears(int numberOfYears) {
+		this.numberOfYears = numberOfYears;
+	}
+
+	public Double getSantaBudget() {
+		return santaBudget;
+	}
+
+	public void setSantaBudget(Double santaBudget) {
+		this.santaBudget = santaBudget;
+	}
+
+	public void setChildren(ArrayList<Child> children) {
+		this.children = children;
+	}
+
+	public void setPresents(ArrayList<Present> presents) {
+		this.presents = presents;
+	}
+
+	public void setAnnualChanges(ArrayList<AnnualChanges> annualChanges) {
+		this.annualChanges = annualChanges;
+	}
+
+	@Override
+	public String toString() {
+		return "Database{" +
+				"numberOfYears=" + numberOfYears +
+				", santaBudget=" + santaBudget +
+				", children=" + children +
+				", presents=" + presents +
+				", annualChanges=" + annualChanges +
+				'}';
 	}
 }
