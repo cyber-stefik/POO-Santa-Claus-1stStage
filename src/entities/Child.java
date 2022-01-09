@@ -14,20 +14,18 @@ public final class Child {
     private Double assignedBudget;
     private ArrayList<Gift> receivedGifts;
 
-    public Child(final int id, final String lastName, final String firstName,
-                 final int age, final String city, final Double averageScore,
-                 final ArrayList<String> giftsPreference) {
-        this.id = id;
-        this.lastName = lastName;
-        this.firstName = firstName;
-        this.age = age;
-        this.city = city;
-        this.averageScore = averageScore;
-        this.giftsPreferences = giftsPreference;
-        niceScoreHistory = new ArrayList<>();
-        niceScoreHistory.add(averageScore);
-        assignedBudget = 0.0;
-        receivedGifts = new ArrayList<>();
+    // Builder pattern
+    private Child(final ChildBuilder childBuilder) {
+        this.id = childBuilder.id;
+        this.lastName = childBuilder.lastName;
+        this.firstName = childBuilder.firstName;
+        this.city = childBuilder.city;
+        this.age = childBuilder.age;
+        this.giftsPreferences = childBuilder.giftsPreferences;
+        this.averageScore = childBuilder.averageScore;
+        this.niceScoreHistory = childBuilder.niceScoreHistory;
+        this.assignedBudget = childBuilder.assignedBudget;
+        this.receivedGifts = childBuilder.receivedGifts;
     }
 
     public Child(final Child child) {
@@ -105,6 +103,74 @@ public final class Child {
 
     public void setAverageScore(final Double averageScore) {
         this.averageScore = averageScore;
+    }
+
+    // Builder pattern
+    public static class ChildBuilder {
+        private final int id;
+        private final String lastName;
+        private final String firstName;
+        private final String city;
+        private int age;
+        private ArrayList<String> giftsPreferences;
+        private Double averageScore;
+        private ArrayList<Double> niceScoreHistory;
+        private Double assignedBudget;
+        private ArrayList<Gift> receivedGifts;
+
+        public ChildBuilder(final int id, final String lastName, final String firstName,
+                     final int age, final String city, final Double averageScore,
+                     final ArrayList<String> giftsPreference) {
+            this.id = id;
+            this.lastName = lastName;
+            this.firstName = firstName;
+            this.age = age;
+            this.city = city;
+            this.averageScore = averageScore;
+            this.giftsPreferences = giftsPreference;
+        }
+
+        /**
+         *
+         * @param niceScoreHistory1 create a new ArrayList of scores
+         * @return
+         */
+        public final ChildBuilder niceScoreHistory(final ArrayList<Double>
+                                                     niceScoreHistory1) {
+            this.niceScoreHistory = new ArrayList<>();
+            this.niceScoreHistory.add(this.averageScore);
+            return this;
+        }
+
+        /**
+         *
+         * @param assignedBudget1 the assigned budget, if there will be one in
+         *                       the input jsons
+         * @return
+         */
+        public final ChildBuilder assignedBudget(final Double assignedBudget1) {
+            this.assignedBudget = assignedBudget1;
+            return this;
+        }
+
+        /**
+         *
+         * @param receivedGifts1 create a new ArrayList of gifts
+         * @return
+         */
+        public final ChildBuilder receivedGifts(final ArrayList<Gift>
+                                                        receivedGifts1) {
+            this.receivedGifts = new ArrayList<>();
+            return this;
+        }
+
+        /**
+         *
+         * @return a child object, with the mandatory and optional fields
+         */
+        public Child build() {
+            return new Child(this);
+        }
     }
 
 }

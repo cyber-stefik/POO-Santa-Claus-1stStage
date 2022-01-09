@@ -146,7 +146,8 @@ public final class InputLoader {
                 .get(Constants.CITY));
         String niceScore = String.valueOf(jsonChild
                 .get(Constants.NICESCORE));
-        children.add(new Child(
+        // add a child in the database using Builder strategy
+        children.add(new Child.ChildBuilder(
                 Integer.parseInt(id),
                 lastName,
                 firstName,
@@ -155,6 +156,10 @@ public final class InputLoader {
                 Double.valueOf(niceScore),
                 Utils.convertJSONArray((JSONArray)
                         jsonChild.get(Constants.GIFTSPREFERENCES)
-                )));
+                ))
+                        .niceScoreHistory(null)
+                        .assignedBudget(0.0)
+                        .receivedGifts(null)
+                .build());
     }
 }
