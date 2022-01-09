@@ -3,64 +3,108 @@ package entities;
 import java.util.ArrayList;
 
 public final class Child {
-	private final int id;
-	private final String lastName;
-	private final String firstName;
-	private final int age;
-	private final String city;
-	private final Double niceScore;
-	private final ArrayList<String> giftsPreference;
+    private final int id;
+    private final String lastName;
+    private final String firstName;
+    private final String city;
+    private int age;
+    private ArrayList<String> giftsPreferences;
+    private Double averageScore;
+    private ArrayList<Double> niceScoreHistory;
+    private Double assignedBudget;
+    private ArrayList<Gift> receivedGifts;
 
-	public Child(int id, String lastName, String firstName, int age,
-				 String city, Double niceScore,
-				 ArrayList<String> giftsPreference) {
-		this.id = id;
-		this.lastName = lastName;
-		this.firstName = firstName;
-		this.age = age;
-		this.city = city;
-		this.niceScore = niceScore;
-		this.giftsPreference = giftsPreference;
-	}
+    public Child(final int id, final String lastName, final String firstName,
+                 final int age, final String city, final Double niceScore,
+                 final ArrayList<String> giftsPreference) {
+        this.id = id;
+        this.lastName = lastName;
+        this.firstName = firstName;
+        this.age = age;
+        this.city = city;
+        this.averageScore = niceScore;
+        this.giftsPreferences = giftsPreference;
+        niceScoreHistory = new ArrayList<>();
+        niceScoreHistory.add(niceScore);
+        assignedBudget = 0.0;
+        receivedGifts = new ArrayList<>();
+    }
 
-	public int getId() {
-		return id;
-	}
+    public Child(final Child child) {
+        this.id = child.getId();
+        this.lastName = child.getLastName();
+        this.firstName = child.getFirstName();
+        this.age = child.getAge();
+        this.city = child.getCity();
+        this.averageScore = child.getAverageScore();
+        this.giftsPreferences = new ArrayList<>(child.getGiftsPreferences());
+        niceScoreHistory = new ArrayList<>(child.getNiceScoreHistory());
+        assignedBudget = child.getAssignedBudget();
+        receivedGifts = new ArrayList<>(child.getReceivedGifts());
+    }
 
-	public String getLastName() {
-		return lastName;
-	}
+    public int getId() {
+        return id;
+    }
 
-	public String getFirstName() {
-		return firstName;
-	}
+    public String getLastName() {
+        return lastName;
+    }
 
-	public int getAge() {
-		return age;
-	}
+    public String getFirstName() {
+        return firstName;
+    }
 
-	public String getCity() {
-		return city;
-	}
+    public int getAge() {
+        return age;
+    }
 
-	public Double getNiceScore() {
-		return niceScore;
-	}
+    public String getCity() {
+        return city;
+    }
 
-	public ArrayList<String> getGiftsPreference() {
-		return giftsPreference;
-	}
+    public Double getAverageScore() {
+        return averageScore;
+    }
 
-	@Override
-	public String toString() {
-		return "Child{" +
-				"id=" + id +
-				", lastName='" + lastName + '\'' +
-				", firstName='" + firstName + '\'' +
-				", age=" + age +
-				", city='" + city + '\'' +
-				", niceScore=" + niceScore +
-				", giftsPreference=" + giftsPreference +
-				'}';
-	}
+    public ArrayList<String> getGiftsPreferences() {
+        return giftsPreferences;
+    }
+
+    public void setAge(final int age) {
+        this.age = age;
+    }
+
+    public void setGiftsPreferences(final ArrayList<String> giftsPreferences) {
+        this.giftsPreferences = giftsPreferences;
+    }
+
+    public ArrayList<Double> getNiceScoreHistory() {
+        return niceScoreHistory;
+    }
+
+    public void setNiceScoreHistory(final ArrayList<Double> niceScoreHistory) {
+        this.niceScoreHistory = niceScoreHistory;
+    }
+
+    public Double getAssignedBudget() {
+        return assignedBudget;
+    }
+
+    public void setAssignedBudget(final Double assignedBudget) {
+        this.assignedBudget = assignedBudget;
+    }
+
+    public ArrayList<Gift> getReceivedGifts() {
+        return receivedGifts;
+    }
+
+    public void setReceivedGifts(final ArrayList<Gift> receivedGifts) {
+        this.receivedGifts = receivedGifts;
+    }
+
+    public void setAverageScore(final Double averageScore) {
+        this.averageScore = averageScore;
+    }
+
 }
