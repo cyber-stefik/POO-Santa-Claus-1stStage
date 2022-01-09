@@ -10,6 +10,8 @@ public final class Constants {
     public static final Integer MAXIMUM_ERROR_CHECKSTYLE = 30;
     public static final Integer CHECKSTYLE_POINTS = 10;
     public static final Integer TESTS_NUMBER_SMALL = 15;
+    public static final String NUMBEROFYEARS = "numberOfYears";
+    public static final String SANTABUDGET = "santaBudget";
     public static final String INITIALDATA = "initialData";
     public static final String ANNUALCHANGES = "annualChanges";
     public static final String CHILDREN = "children";

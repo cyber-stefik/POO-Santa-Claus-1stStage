@@ -2,12 +2,11 @@ package main;
 
 import action.Action;
 import checker.Checker;
-import checker.Checkstyle;
 import common.Constants;
 import database.Database;
 import fileio.Input;
 import fileio.InputLoader;
-import org.json.simple.JSONArray;
+import fileio.Writer;
 
 import java.io.File;
 import java.io.IOException;
@@ -15,11 +14,15 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Objects;
+import common.Constants;
 
 /**
  * Class used to run the code
  */
 public final class Main {
+    public static final int DECIMAL = 10;
+    public static final int POSSIBLYUNIT = 11;
+    public static final Integer TESTS_NUMBER = 25;
 
     private Main() {
         ///constructor for checkstyle
@@ -35,36 +38,32 @@ public final class Main {
         if (!Files.exists(path)) {
             Files.createDirectories(path);
         }
-        int count = 1;
         for (File file : Objects.requireNonNull(directory.listFiles())) {
-
-            String filepath = Constants.OUTPUT_PATH + count + ".json";
-            count++;
-            InputLoader inputLoader = new InputLoader(file.getAbsolutePath());
-            Input input = inputLoader.readData();
-            File out = new File(filepath);
-            boolean isCreated = out.createNewFile();
-//            if (isCreated) {
-//                action(file.getAbsolutePath(), filepath);
-//            }
+            String filename = file.toString();
+            String filepath = getOutputName(filename);
+            action(file.getAbsolutePath(), filepath);
         }
         Checker.calculateScore();
     }
 
-//    public static void action(final String filePath1,
-//                              final String filePath2) throws IOException {
-//        InputLoader inputLoader = new InputLoader(filePath1);
-//        Input input = inputLoader.readData();
-//
-//        Writer fileWriter = new Writer(filePath2);
-//        JSONArray arrayResult = new JSONArray();
-//        // My EntryPoint
-//        Database database = Database.getDatabase();
-//        database.addData(input);
-//        Action.choose(database, arrayResult, fileWriter, input.getCommands());
-//
-//        //TODO add here the entry point to your implementation
-//
-//        fileWriter.closeJSON(arrayResult);
-//    }
+    private static String getOutputName(final String filename) {
+        StringBuilder testNumber = new StringBuilder();
+        testNumber.append(filename.charAt(DECIMAL));
+        if (filename.charAt(POSSIBLYUNIT) != '.') {
+            testNumber.append(filename.charAt(POSSIBLYUNIT));
+        }
+        return Constants.OUTPUT_PATH + testNumber + ".json";
+    }
+
+    public static void action(final String filePath1,
+                              final String filePath2) throws IOException {
+        InputLoader inputLoader = new InputLoader(filePath1);
+        Input input = inputLoader.readData();
+
+        Writer fileWriter = new Writer(filePath2);
+        // My EntryPoint
+        Database database = Database.getDatabase();
+        database.addData(input);
+        Action.solve(database, fileWriter, filePath2);
+    }
 }
