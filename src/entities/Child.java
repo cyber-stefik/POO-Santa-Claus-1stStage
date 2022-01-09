@@ -15,17 +15,17 @@ public final class Child {
     private ArrayList<Gift> receivedGifts;
 
     public Child(final int id, final String lastName, final String firstName,
-                 final int age, final String city, final Double niceScore,
+                 final int age, final String city, final Double averageScore,
                  final ArrayList<String> giftsPreference) {
         this.id = id;
         this.lastName = lastName;
         this.firstName = firstName;
         this.age = age;
         this.city = city;
-        this.averageScore = niceScore;
+        this.averageScore = averageScore;
         this.giftsPreferences = giftsPreference;
         niceScoreHistory = new ArrayList<>();
-        niceScoreHistory.add(niceScore);
+        niceScoreHistory.add(averageScore);
         assignedBudget = 0.0;
         receivedGifts = new ArrayList<>();
     }

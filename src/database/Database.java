@@ -8,11 +8,13 @@ import fileio.Input;
 import java.util.ArrayList;
 
 public final class Database {
+    // input data
     private int numberOfYears;
     private Double santaBudget;
     private ArrayList<Child> children = new ArrayList<>();
     private ArrayList<Gift> gifts = new ArrayList<>();
     private ArrayList<AnnualChange> annualChanges = new ArrayList<>();
+    // Singleton
     private static final Database INSTANCE = new Database();
     private static int instanceCount = 0;
 
@@ -28,6 +30,10 @@ public final class Database {
         return instanceCount;
     }
 
+    /**
+     *
+     * @param input input I created in InputLoader from json files
+     */
     public void addData(final Input input) {
         this.numberOfYears = input.getNumberOfYears();
         this.santaBudget = input.getSantaBudget();

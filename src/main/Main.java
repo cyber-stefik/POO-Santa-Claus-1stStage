@@ -14,7 +14,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Objects;
-import common.Constants;
 
 /**
  * Class used to run the code
@@ -22,7 +21,6 @@ import common.Constants;
 public final class Main {
     public static final int DECIMAL = 10;
     public static final int POSSIBLYUNIT = 11;
-    public static final Integer TESTS_NUMBER = 25;
 
     private Main() {
         ///constructor for checkstyle
@@ -55,6 +53,12 @@ public final class Main {
         return Constants.OUTPUT_PATH + testNumber + ".json";
     }
 
+    /**
+     *
+     * @param filePath1 absolute path of the input file
+     * @param filePath2 path for the output
+     * @throws IOException in case of exceptions to reading / writing
+     */
     public static void action(final String filePath1,
                               final String filePath2) throws IOException {
         InputLoader inputLoader = new InputLoader(filePath1);

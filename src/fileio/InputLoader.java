@@ -26,6 +26,11 @@ public final class InputLoader {
         return inputPath;
     }
 
+    /**
+     *
+     * @return returns the input json, using different types of variables for
+     *          storing the values of each field
+     */
     public Input readData() {
         JSONParser jsonParser = new JSONParser();
         String numberOfYears = "0";

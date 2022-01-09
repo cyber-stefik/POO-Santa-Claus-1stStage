@@ -1,12 +1,12 @@
 package entities;
 
-public final class Present {
+public final class Gift {
     private final String productName;
     private final Double price;
     private final String category;
 
-    public Present(final String productName, final Double price,
-                   final String category) {
+    public Gift(final String productName, final Double price,
+                final String category) {
         this.productName = productName;
         this.price = price;
         this.category = category;
